@@ -1,5 +1,6 @@
 package main
 
+// Data Structures
 import (
 	"fmt"
 	"io/ioutil"
