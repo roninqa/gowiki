@@ -1,6 +1,6 @@
 package main
 
-//Using net/http to serve wiki pages
+// Introducing the net/http package (an interlude)
 import (
 	"fmt"
 	"net/http"
