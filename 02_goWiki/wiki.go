@@ -1,5 +1,6 @@
 package main
 
+//Using net/http to serve wiki pages
 import (
 	"fmt"
 	"io/ioutil"
