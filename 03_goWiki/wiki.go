@@ -4,6 +4,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -28,12 +29,28 @@ func loadPage(title string) (*Page, error) {
 }
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
-	title := r.URL.Path[len("/view/"):]
+	title := r.URL.Path[1:]
 	p, _ := loadPage(title)
 	fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", p.Title, p.Body)
 }
 
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hi there, I love %s!", r.URL.Path[1:])
+}
+
+func vhandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hi there, Chue. I love %s!", r.URL.Path[1:])
+}
+
 func main() {
-	http.HandleFunc("/view/", viewHandler)
-	http.ListenAndServe(":8080", nil)
+	// adding some troubleshooting
+	http.HandleFunc("/", handler)
+	http.HandleFunc("/view/", vhandler)
+	// this route is not working...in ubuntu
+	// http.HandleFunc("/view/", viewHandler)
+	// http.ListenAndServe(":8080", nil)
+
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
 }
