@@ -53,7 +53,11 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
 	p.Title, p.Title, p.Body)*/
 
 	// Use templates to abstract the html code
-	t, _ := template.ParseFiles("edit.gohtml")
+	t, err := template.ParseFiles("edit.gohtml")
+	if err != nil {
+		log.Fatalf("Oh, snaps! The template does not exist: %s\n", err)
+	}
+
 	t.Execute(w, p)
 }
 
