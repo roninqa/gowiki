@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -27,6 +28,7 @@ func loadPage(title string) (*Page, error) {
 	// The test.txt file is read
 	body, err := ioutil.ReadFile(filename)
 	if err != nil {
+		log.Println("Oh, snaps! The file does not exist. You will need to create the file.***")
 		return nil, err
 	}
 	return &Page{Title: title, Body: body}, nil
