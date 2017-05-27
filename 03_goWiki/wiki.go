@@ -19,8 +19,12 @@ func (p *Page) save() error {
 	return ioutil.WriteFile(filename, p.Body, 0600)
 }
 
+// The title is passed
 func loadPage(title string) (*Page, error) {
+	// The title must match the .txt file
 	filename := title + ".txt"
+
+	// The test.txt file is read
 	body, err := ioutil.ReadFile(filename)
 	if err != nil {
 		return nil, err
@@ -28,6 +32,8 @@ func loadPage(title string) (*Page, error) {
 	return &Page{Title: title, Body: body}, nil
 }
 
+// You will need to hit the 'view' route and then
+// enter the title. The title is the .txt file
 func viewHandler(w http.ResponseWriter, r *http.Request) {
 	title := r.URL.Path[len("/view/"):]
 	p, _ := loadPage(title)
