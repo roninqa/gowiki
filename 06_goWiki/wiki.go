@@ -1,7 +1,7 @@
 package main
 
 // Editing Pages
-// Handling non-existent pages and Saving Pages
+// Error Handling, Template Caching, Validation
 import (
 	"html/template"
 	"io/ioutil"
